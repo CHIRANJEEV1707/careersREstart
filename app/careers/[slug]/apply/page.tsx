@@ -273,11 +273,11 @@ export default function ApplyPage() {
                 <select
                   value={countryCode}
                   onChange={handleCodeChange}
-                  className="bg-transparent text-sm border-r border-border px-3 py-2 outline-none cursor-pointer hover:bg-muted/50 transition-colors w-[80px]"
+                  className="bg-transparent text-sm border-r border-border px-3 py-2 outline-none cursor-pointer hover:bg-muted/50 transition-colors w-[140px]"
                 >
                   {countryCodes.map((c) => (
                     <option key={c.code} value={c.code} className="bg-background text-foreground">
-                      {c.code}
+                      {c.code} ({c.country})
                     </option>
                   ))}
                 </select>
