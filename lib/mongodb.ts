@@ -4,22 +4,6 @@ import mongoose from 'mongoose';
 // This is needed when using newer Node.js versions with certain OpenSSL builds
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-const MONGODB_URI = process.env.MONGODB_URI!;
-
-if (!MONGODB_URI) {
-  throw new Error('Please define the MONGODB_URI environment variable');
-}
-
-// Runtime Guard: Local development must NOT use SRV records due to DNS instability
-if (process.env.NODE_ENV !== 'production' && MONGODB_URI.startsWith('mongodb+srv://')) {
-  throw new Error(
-    '❌ MongoDB SRV Connection Error (Local Development)\n' +
-    '   You are using "mongodb+srv://" in a local environment. This causes intermittent DNS/TLS failures on Windows.\n' +
-    '   Please use a direct connection string ("mongodb://") in your .env.local file.\n' +
-    '   See README.md for configuration details.'
-  );
-}
-
 interface CachedConnection {
   conn: typeof mongoose | null;
   promise: Promise<typeof mongoose> | null;
@@ -37,6 +21,22 @@ if (!global.mongooseCache) {
 }
 
 async function connectDB() {
+  const MONGODB_URI = process.env.MONGODB_URI;
+
+  if (!MONGODB_URI) {
+    throw new Error('Please define the MONGODB_URI environment variable');
+  }
+
+  // Runtime Guard: Local development must NOT use SRV records due to DNS instability
+  if (process.env.NODE_ENV !== 'production' && MONGODB_URI.startsWith('mongodb+srv://')) {
+    throw new Error(
+      '❌ MongoDB SRV Connection Error (Local Development)\n' +
+      '   You are using "mongodb+srv://" in a local environment. This causes intermittent DNS/TLS failures on Windows.\n' +
+      '   Please use a direct connection string ("mongodb://") in your .env.local file.\n' +
+      '   See README.md for configuration details.'
+    );
+  }
+
   if (cached.conn) {
     return cached.conn;
   }
