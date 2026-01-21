@@ -29,19 +29,27 @@ interface PageProps {
 }
 
 async function getJob(slug: string): Promise<Job | null> {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
     const res = await fetch(`${baseUrl}/api/jobs/${slug}`, {
       cache: 'no-store',
     });
 
     if (!res.ok) {
+      if (res.status === 404) notFound();
       return null;
     }
 
     const data = await res.json();
-    return data.job;
-  } catch {
+    const job = data.job;
+
+    if (!job) notFound();
+
+    return job;
+  } catch (error) {
+    if ((error as any)?.digest === 'NEXT_NOT_FOUND') throw error;
+    console.error("Error fetching job:", error);
     return null;
   }
 }
