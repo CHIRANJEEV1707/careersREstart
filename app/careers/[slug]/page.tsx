@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -70,7 +71,15 @@ export default async function JobDetailPage({ params }: PageProps) {
           <Link href="/careers" className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2">
             <ArrowLeft className="w-4 h-4" /> All Roles
           </Link>
-          <span className="font-semibold tracking-tight">REstart</span>
+          <span className="font-semibold tracking-tight">
+            <Image
+              src="/REstart_logo.svg"
+              alt="REstart"
+              width={100}
+              height={28}
+              priority
+            />
+          </span>
           <Link href={`/careers/${job.slug}/apply`}>
             <Button size="sm" className="rounded-full px-6">Apply</Button>
           </Link>

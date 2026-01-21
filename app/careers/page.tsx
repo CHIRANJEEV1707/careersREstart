@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Search, Loader2 } from "lucide-react";
 import RotatingEarth from "@/components/rotating-earth";
@@ -68,7 +69,15 @@ export default function CareersPage() {
       {/* Fixed Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 h-16 flex items-center justify-between">
-          <Link href="/careers" className="font-semibold text-lg tracking-tight">REstart</Link>
+          <Link href="/careers" className="font-semibold text-lg tracking-tight">
+            <Image
+              src="/REstart_logo.svg"
+              alt="REstart"
+              width={100}
+              height={28}
+              priority
+            />
+          </Link>
           <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
             <a href="#about" className="hover:text-foreground transition-colors">About</a>
             <a href="#roles" className="hover:text-foreground transition-colors">Roles</a>
