@@ -4,6 +4,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "REstart - Careers",
   description: "Join the REstart team and help us build the future.",
+  icons: {
+    icon: "/Restart_favicon.ico",
+  },
 };
 
 export default function RootLayout({
