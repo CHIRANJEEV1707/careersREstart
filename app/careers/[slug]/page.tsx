@@ -1,9 +1,24 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { jobs } from "@/data/mock-jobs";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft } from "lucide-react";
+import ShareButton from "@/components/ShareButton";
+
+interface Job {
+  _id: string;
+  title: string;
+  slug: string;
+  shortDescription: string;
+  fullDescription: string;
+  responsibilities: string[];
+  requirements: string[];
+  niceToHave: string[];
+  category: string;
+  tags: string[];
+  location: string;
+  type: string;
+}
 
 interface PageProps {
   params: Promise<{
@@ -11,15 +26,27 @@ interface PageProps {
   }>;
 }
 
-export async function generateStaticParams() {
-  return jobs.map((job) => ({
-    slug: job.slug,
-  }));
+async function getJob(slug: string): Promise<Job | null> {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const res = await fetch(`${baseUrl}/api/jobs/${slug}`, {
+      cache: 'no-store',
+    });
+
+    if (!res.ok) {
+      return null;
+    }
+
+    const data = await res.json();
+    return data.job;
+  } catch {
+    return null;
+  }
 }
 
 export default async function JobDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const job = jobs.find((j) => j.slug === slug);
+  const job = await getJob(slug);
 
   if (!job) {
     notFound();
@@ -56,8 +83,12 @@ export default async function JobDetailPage({ params }: PageProps) {
           </h1>
 
           <p className="text-xl md:text-2xl font-light text-muted-foreground leading-relaxed max-w-2xl">
-            {job.description}
+            {job.shortDescription}
           </p>
+
+          <div className="mt-8">
+            <ShareButton title={job.title} slug={job.slug} />
+          </div>
         </header>
 
         {/* Content - Editorial Layout */}
@@ -66,7 +97,7 @@ export default async function JobDetailPage({ params }: PageProps) {
             <section>
               <h2 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-6">About the Role</h2>
               <p className="text-lg leading-relaxed font-light text-foreground/90">
-                {job.about}
+                {job.fullDescription}
               </p>
             </section>
 
@@ -107,7 +138,7 @@ export default async function JobDetailPage({ params }: PageProps) {
             <div className="bg-secondary/30 p-8 rounded-lg">
               <h3 className="font-medium mb-4">Skills</h3>
               <div className="flex flex-wrap gap-2">
-                {job.skills.map(skill => (
+                {job.tags.map(skill => (
                   <span key={skill} className="text-xs border border-border bg-background px-3 py-1.5 rounded-full text-muted-foreground">
                     {skill}
                   </span>

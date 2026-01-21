@@ -1,15 +1,47 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { jobs } from "@/data/mock-jobs";
-import { ArrowRight, Search } from "lucide-react";
+import { ArrowRight, Search, Loader2 } from "lucide-react";
 import RotatingEarth from "@/components/rotating-earth";
 
+interface Job {
+  _id: string;
+  slug: string;
+  title: string;
+  shortDescription: string;
+  category: string;
+  tags: string[];
+  location: string;
+  type: string;
+}
+
 export default function CareersPage() {
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+
+  // Fetch jobs from API
+  useEffect(() => {
+    async function fetchJobs() {
+      try {
+        setIsLoading(true);
+        const res = await fetch('/api/jobs');
+        if (!res.ok) throw new Error('Failed to fetch jobs');
+        const data = await res.json();
+        setJobs(data.jobs);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Something went wrong');
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchJobs();
+  }, []);
 
   const categories = Array.from(new Set(jobs.map((job) => job.category)));
 
@@ -23,9 +55,9 @@ export default function CareersPage() {
 
   const filteredJobs = jobs.filter((job) => {
     const matchesSearch = job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      job.description.toLowerCase().includes(searchTerm.toLowerCase());
+      job.shortDescription.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory ? job.category === selectedCategory : true;
-    const matchesSkills = selectedSkills.length > 0 ? selectedSkills.every((s) => job.skills.includes(s)) : true;
+    const matchesSkills = selectedSkills.length > 0 ? selectedSkills.every((s) => job.tags.includes(s)) : true;
 
     return matchesSearch && matchesCategory && matchesSkills;
   });
@@ -136,8 +168,6 @@ export default function CareersPage() {
         </div>
       </section>
 
-
-
       {/* 4. OPEN ROLES - Discovery */}
       <section id="roles" className="py-32 px-6 md:px-12 max-w-[1400px] mx-auto">
         <div className="mb-16">
@@ -192,9 +222,21 @@ export default function CareersPage() {
 
         {/* Job List */}
         <div className="space-y-2">
-          {filteredJobs.length > 0 ? (
+          {isLoading ? (
+            <div className="py-24 flex flex-col items-center justify-center gap-4">
+              <Loader2 className="w-8 h-8 animate-spin text-primary" />
+              <p className="text-muted-foreground">Loading positions...</p>
+            </div>
+          ) : error ? (
+            <div className="py-24 text-center rounded-xl border border-dashed border-destructive/50">
+              <p className="text-destructive text-lg">{error}</p>
+              <button onClick={() => window.location.reload()} className="text-sm text-foreground underline underline-offset-4 mt-4 hover:opacity-70 transition-opacity">
+                Try again
+              </button>
+            </div>
+          ) : filteredJobs.length > 0 ? (
             filteredJobs.map((job) => (
-              <Link key={job.id} href={`/careers/${job.slug}`} className="group block">
+              <Link key={job._id} href={`/careers/${job.slug}`} className="group block">
                 <article className="grid md:grid-cols-12 gap-4 md:gap-6 p-6 rounded-xl hover:bg-secondary/50 transition-colors items-center">
                   <div className="md:col-span-4">
                     <h3 className="text-lg font-medium group-hover:text-foreground/70 transition-colors">{job.title}</h3>
@@ -206,12 +248,12 @@ export default function CareersPage() {
                   </div>
                   <div className="md:col-span-5">
                     <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2 group-hover:text-foreground/70 transition-colors">
-                      {job.description}
+                      {job.shortDescription}
                     </p>
                   </div>
                   <div className="md:col-span-3 flex justify-start md:justify-end items-center gap-3">
                     <div className="flex gap-2 flex-wrap">
-                      {job.skills.slice(0, 2).map(skill => (
+                      {job.tags.slice(0, 2).map(skill => (
                         <span key={skill} className="text-xs text-muted-foreground bg-secondary px-2.5 py-1 rounded-md">
                           {skill}
                         </span>
