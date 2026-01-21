@@ -4,11 +4,22 @@ import crypto from 'crypto';
 export interface IApplication extends Document {
   name: string;
   email: string;
-  phone?: string;
+  phone: string;
+  college: string;
+  year: string;
+  location: string;
+  roleApplied: string;
+  availability: string;
+  startTimeline: string;
   portfolioLink: string;
   resumeUrl?: string;
-  coverNote: string;
-  weeklyAvailability: string;
+  experienceSummary: string;
+  motivation: string;
+  problemInterest: string;
+  examBackground?: string;
+  teachingExperience?: string;
+  commitmentConfirmed: boolean;
+  referralSource?: string;
   jobId: mongoose.Types.ObjectId;
   status: 'new' | 'reviewing' | 'interviewed' | 'rejected' | 'hired';
   trackingCode: string;
@@ -37,6 +48,37 @@ const ApplicationSchema = new Schema<IApplication>(
     },
     phone: {
       type: String,
+      required: [true, 'Phone number is required'],
+      trim: true,
+    },
+    college: {
+      type: String,
+      required: [true, 'College/Organization is required'],
+      trim: true,
+    },
+    year: {
+      type: String,
+      required: [true, 'Year of study/graduation is required'],
+      trim: true,
+    },
+    location: {
+      type: String,
+      required: [true, 'Current location is required'],
+      trim: true,
+    },
+    roleApplied: {
+      type: String,
+      required: [true, 'Role applied for is required'],
+      trim: true,
+    },
+    availability: {
+      type: String,
+      required: [true, 'Weekly availability is required'],
+      trim: true,
+    },
+    startTimeline: {
+      type: String,
+      required: [true, 'Start timeline is required'],
       trim: true,
     },
     portfolioLink: {
@@ -48,14 +90,37 @@ const ApplicationSchema = new Schema<IApplication>(
       type: String,
       trim: true,
     },
-    coverNote: {
+    experienceSummary: {
       type: String,
-      required: [true, 'Cover note is required'],
+      required: [true, 'Experience summary is required'],
+      trim: true,
+      minlength: [100, 'Experience summary must be at least 100 characters'],
+    },
+    motivation: {
+      type: String,
+      required: [true, 'Motivation is required'],
       trim: true,
     },
-    weeklyAvailability: {
+    problemInterest: {
       type: String,
-      required: [true, 'Weekly availability is required'],
+      required: [true, 'Problem interest is required'],
+      trim: true,
+    },
+    examBackground: {
+      type: String,
+      trim: true,
+    },
+    teachingExperience: {
+      type: String,
+      trim: true,
+    },
+    commitmentConfirmed: {
+      type: Boolean,
+      required: [true, 'Commitment confirmation is required'],
+      default: false,
+    },
+    referralSource: {
+      type: String,
       trim: true,
     },
     jobId: {

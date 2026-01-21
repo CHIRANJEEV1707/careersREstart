@@ -11,11 +11,21 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 interface ApplicationBody {
   name: string;
   email: string;
-  phone?: string;
+  phone: string;
+  college: string;
+  year: string;
+  location: string;
+  availability: string;
+  startTimeline: string;
   portfolioLink: string;
   resumeUrl?: string;
-  coverNote: string;
-  weeklyAvailability: string;
+  experienceSummary: string;
+  motivation: string;
+  problemInterest: string;
+  examBackground?: string;
+  teachingExperience?: string;
+  commitmentConfirmed: boolean;
+  referralSource?: string;
   jobSlug: string;
 }
 
@@ -28,9 +38,8 @@ export async function POST(request: Request) {
     // Server-side validation
     const errors: Record<string, string> = {};
 
-    if (!body.name || body.name.trim().length === 0) {
-      errors.name = 'Name is required';
-    }
+    // 1. Personal Info
+    if (!body.name || body.name.trim().length === 0) errors.name = 'Name is required';
 
     if (!body.email || body.email.trim().length === 0) {
       errors.email = 'Email is required';
@@ -38,21 +47,32 @@ export async function POST(request: Request) {
       errors.email = 'Please enter a valid email address';
     }
 
-    if (!body.portfolioLink || body.portfolioLink.trim().length === 0) {
-      errors.portfolioLink = 'Portfolio link is required';
+    if (!body.phone || body.phone.trim().length === 0) errors.phone = 'Phone number is required';
+    if (!body.college || body.college.trim().length === 0) errors.college = 'College/Organization is required';
+    if (!body.year || body.year.trim().length === 0) errors.year = 'Year is required';
+    if (!body.location || body.location.trim().length === 0) errors.location = 'Location is required';
+
+    // 2. Role Context
+    // jobSlug is checked via DB query later, but we check presence here
+    if (!body.jobSlug) errors.jobSlug = 'Job is required';
+    if (!body.availability) errors.availability = 'Availability is required';
+    if (!body.startTimeline) errors.startTimeline = 'Start timeline is required';
+
+    // 3. Proof of Work
+    if (!body.portfolioLink || body.portfolioLink.trim().length === 0) errors.portfolioLink = 'Portfolio link is required';
+    if (!body.experienceSummary || body.experienceSummary.trim().length === 0) {
+      errors.experienceSummary = 'Experience summary is required';
+    } else if (body.experienceSummary.trim().length < 50) {
+      // Relaxed min-length on API side, strict on Client
+      errors.experienceSummary = 'Experience summary is too short';
     }
 
-    if (!body.coverNote || body.coverNote.trim().length === 0) {
-      errors.coverNote = 'Cover note is required';
-    }
+    // 4. Motivation
+    if (!body.motivation || body.motivation.trim().length === 0) errors.motivation = 'Motivation is required';
+    if (!body.problemInterest || body.problemInterest.trim().length === 0) errors.problemInterest = 'Problem interest is required';
 
-    if (!body.weeklyAvailability || body.weeklyAvailability.trim().length === 0) {
-      errors.weeklyAvailability = 'Weekly availability is required';
-    }
-
-    if (!body.jobSlug) {
-      errors.jobSlug = 'Job slug is required';
-    }
+    // 6. Logistics
+    if (body.commitmentConfirmed !== true) errors.commitmentConfirmed = 'You must confirm your commitment';
 
     // Return validation errors if any
     if (Object.keys(errors).length > 0) {
@@ -85,20 +105,31 @@ export async function POST(request: Request) {
       );
     }
 
-    // Create the application (trackingCode is auto-generated)
+    // Create the application
     const application = await Application.create({
       name: body.name.trim(),
       email: body.email.toLowerCase().trim(),
-      phone: body.phone?.trim() || undefined,
+      phone: body.phone.trim(),
+      college: body.college.trim(),
+      year: body.year.trim(),
+      location: body.location.trim(),
+      roleApplied: job.title,
+      availability: body.availability,
+      startTimeline: body.startTimeline,
       portfolioLink: body.portfolioLink.trim(),
       resumeUrl: body.resumeUrl?.trim() || undefined,
-      coverNote: body.coverNote.trim(),
-      weeklyAvailability: body.weeklyAvailability.trim(),
+      experienceSummary: body.experienceSummary.trim(),
+      motivation: body.motivation.trim(),
+      problemInterest: body.problemInterest.trim(),
+      examBackground: body.examBackground?.trim() || undefined,
+      teachingExperience: body.teachingExperience?.trim() || undefined,
+      commitmentConfirmed: body.commitmentConfirmed,
+      referralSource: body.referralSource?.trim() || undefined,
       jobId: job._id,
       status: 'new',
     });
 
-    // Send confirmation email asynchronously (don't block response)
+    // Send confirmation email asynchronously
     sendEmail({
       to: application.email,
       subject: `Application Received - ${job.title} at REstart`,
@@ -116,7 +147,6 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('Error submitting application:', error);
 
-    // Handle duplicate key error (backup for race condition)
     if (error instanceof mongoose.Error || (error as { code?: number }).code === 11000) {
       return NextResponse.json(
         { error: 'You have already applied for this position' },
