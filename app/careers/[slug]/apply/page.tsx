@@ -407,13 +407,14 @@ export default function ApplyPage() {
               <div className="space-y-2 pt-2">
                 <div className="flex justify-between items-end">
                   <label className="text-sm font-medium text-slate-700" htmlFor="experienceSummary">Relevant Experience *</label>
-                  <span className={`text-[10px] uppercase font-semibold tracking-wider ${formData.experienceSummary.length > 50 ? "text-green-600" : "text-slate-400"}`}>{formData.experienceSummary.length} chars</span>
+                  <span className={`text-[10px] uppercase font-semibold tracking-wider ${formData.experienceSummary.length > 50 ? "text-green-600" : "text-slate-400"}`}>{formData.experienceSummary.length} / 1200 chars</span>
                 </div>
                 <textarea
                   id="experienceSummary"
                   name="experienceSummary"
                   value={formData.experienceSummary}
                   onChange={handleChange}
+                  maxLength={1200}
                   placeholder="Tell us about the most relevant project you've built. Be specific about your contribution."
                   className={`flex min-h-[140px] w-full rounded-xl border bg-slate-50/50 px-4 py-3 text-sm placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all ${errors.experienceSummary ? "border-red-500 ring-red-200 focus:ring-red-200 bg-red-50/30" : "border-slate-200"}`}
                 />
@@ -433,13 +434,14 @@ export default function ApplyPage() {
               <div className="space-y-2">
                 <div className="flex justify-between items-end">
                   <label className="text-sm font-medium text-slate-700" htmlFor="motivation">Why are you interested in this role? *</label>
-                  <span className="text-[10px] font-semibold text-slate-400">{formData.motivation.length} chars</span>
+                  <span className="text-[10px] font-semibold text-slate-400">{formData.motivation.length} / 1200 chars</span>
                 </div>
                 <textarea
                   id="motivation"
                   name="motivation"
                   value={formData.motivation}
                   onChange={handleChange}
+                  maxLength={1200}
                   placeholder="What drives you? Why REstart?"
                   className={`flex min-h-[120px] w-full rounded-xl border bg-slate-50/50 px-4 py-3 text-sm placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all ${errors.motivation ? "border-red-500 ring-red-200 bg-red-50/30" : "border-slate-200"}`}
                 />
@@ -448,13 +450,14 @@ export default function ApplyPage() {
               <div className="space-y-2">
                 <div className="flex justify-between items-end">
                   <label className="text-sm font-medium text-slate-700" htmlFor="problemInterest">What kind of problems do you enjoy solving? *</label>
-                  <span className="text-[10px] font-semibold text-slate-400">{formData.problemInterest.length} chars</span>
+                  <span className="text-[10px] font-semibold text-slate-400">{formData.problemInterest.length} / 1200 chars</span>
                 </div>
                 <textarea
                   id="problemInterest"
                   name="problemInterest"
                   value={formData.problemInterest}
                   onChange={handleChange}
+                  maxLength={1200}
                   placeholder="Give us an example of a hard problem you cracked."
                   className={`flex min-h-[120px] w-full rounded-xl border bg-slate-50/50 px-4 py-3 text-sm placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all ${errors.problemInterest ? "border-red-500 ring-red-200 bg-red-50/30" : "border-slate-200"}`}
                 />
