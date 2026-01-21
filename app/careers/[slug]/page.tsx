@@ -75,8 +75,8 @@ export default async function JobDetailPage({ params }: PageProps) {
             <Image
               src="/REstart_logo.svg"
               alt="REstart"
-              width={130}
-              height={36}
+              width={60}
+              height={60}
               priority
             />
           </span>
