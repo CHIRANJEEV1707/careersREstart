@@ -114,14 +114,15 @@ export default async function JobDetailPage({ params }: PageProps) {
         <div className="grid md:grid-cols-12 gap-12">
           <div className="md:col-span-8 space-y-16">
             <section>
-              <h2 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-6">About the Role</h2>
-              <p className="text-lg leading-relaxed font-light text-foreground/90">
-                {job.fullDescription}
-              </p>
+              <h2 className="text-sm font-semibold uppercase tracking-widest text-primary mb-6">About the Role</h2>
+              <div
+                className="text-lg leading-relaxed font-light text-foreground/90 [&_h3]:text-sm [&_h3]:font-semibold [&_h3]:uppercase [&_h3]:tracking-widest [&_h3]:text-primary [&_h3]:mt-8 [&_h3]:mb-6 [&_ul]:list-none [&_ul]:space-y-4 [&_li]:relative [&_li]:pl-6 [&_li:before]:content-[''] [&_li:before]:absolute [&_li:before]:left-0 [&_li:before]:top-3 [&_li:before]:w-1.5 [&_li:before]:h-1.5 [&_li:before]:rounded-full [&_li:before]:bg-border [&_p]:mb-4"
+                dangerouslySetInnerHTML={{ __html: job.fullDescription }}
+              />
             </section>
 
             <section>
-              <h2 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-6">What you&apos;ll do</h2>
+              <h2 className="text-sm font-semibold uppercase tracking-widest text-primary mb-6">What you&apos;ll do</h2>
               <ul className="space-y-4">
                 {job.responsibilities.map((item, i) => (
                   <li key={i} className="flex gap-4 items-baseline group">
@@ -133,7 +134,7 @@ export default async function JobDetailPage({ params }: PageProps) {
             </section>
 
             <section>
-              <h2 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-6">Requirements</h2>
+              <h2 className="text-sm font-semibold uppercase tracking-widest text-primary mb-6">Requirements</h2>
               <ul className="space-y-4">
                 {job.requirements.map((item, i) => (
                   <li key={i} className="flex gap-4 items-baseline">

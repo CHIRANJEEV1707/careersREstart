@@ -511,7 +511,7 @@ export default function ApplyPage() {
                   <select id="referralSource" name="referralSource" value={formData.referralSource} onChange={handleChange} className="appearance-none flex h-10 w-full rounded-md border bg-white px-3 py-2 text-sm text-slate-700 border-slate-200 focus:border-slate-400 focus:outline-none cursor-pointer">
                     <option value="">Select...</option>
                     <option value="LinkedIn">LinkedIn</option>
-                    <option value="Twitter">Twitter</option>
+
                     <option value="Friend/Referral">Friend/Referral</option>
                     <option value="Campus">Campus Event</option>
                     <option value="Other">Other</option>
@@ -536,7 +536,7 @@ export default function ApplyPage() {
               )}
             </Button>
             <p className="text-center text-xs text-slate-400 mt-6">
-              By submitting, you agree to our privacy policy and data processing for hiring.
+              By submitting, you agree to our <Link href="/privacy" className="underline hover:text-slate-600">Privacy Policy</Link> and <Link href="/terms" className="underline hover:text-slate-600">Terms</Link>.
             </p>
           </div>
         </form>

@@ -80,7 +80,7 @@ export default function CareersPage() {
             />
           </Link>
           <nav className="hidden md:flex items-center gap-8 text-base text-muted-foreground">
-            <a href="#about" className="hover:text-foreground transition-colors">About</a>
+            <Link href="/about" className="hover:text-foreground transition-colors">About</Link>
             <a href="#roles" className="hover:text-foreground transition-colors">Roles</a>
           </nav>
           <button
@@ -97,16 +97,15 @@ export default function CareersPage() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           {/* Left - Text Content */}
           <div className="relative z-10">
-            <p className="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">
+            <p className="text-sm font-medium text-primary uppercase tracking-widest mb-6">
               Careers at REstart
             </p>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.05] mb-8">
               Building better beginnings.
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl mb-10">
-              REstart is a student-led builder ecosystem. We ship real products,
-              learn through execution, and work with real ownership.
-              Ideas become practice here.
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mb-10">
+              Better beginnings come from honest choices, not borrowed ones.<br className="hidden md:block" />
+              REstart is a student-built ecosystem that believes your path doesn&apos;t start with a rank, it starts with understanding yourself.
             </p>
             <div className="flex flex-wrap gap-4">
               <button
@@ -116,12 +115,12 @@ export default function CareersPage() {
                 View open roles
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
-              <a
-                href="#about"
+              <Link
+                href="/about"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-all"
               >
                 Learn more
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -151,7 +150,7 @@ export default function CareersPage() {
             {/* Right Column - Details */}
             <div className="space-y-8 lg:pt-4">
               <div className="space-y-4">
-                <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Ownership</h3>
+                <h3 className="text-sm font-semibold uppercase tracking-widest text-primary">Ownership</h3>
                 <p className="text-foreground/80 leading-relaxed">
                   We strip away the corporate structure and replace it with autonomy.
                   Every member owns their output, from the first line of code to
@@ -159,7 +158,7 @@ export default function CareersPage() {
                 </p>
               </div>
               <div className="space-y-4">
-                <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Collaboration</h3>
+                <h3 className="text-sm font-semibold uppercase tracking-widest text-primary">Collaboration</h3>
                 <p className="text-foreground/80 leading-relaxed">
                   Our culture is defined by cross-functional collaboration.
                   Validation comes from shipping to real users, not from slide decks.
@@ -167,7 +166,7 @@ export default function CareersPage() {
                 </p>
               </div>
               <div className="space-y-4">
-                <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Growth</h3>
+                <h3 className="text-sm font-semibold uppercase tracking-widest text-primary">Growth</h3>
                 <p className="text-foreground/80 leading-relaxed">
                   This isn&apos;t an internship; it&apos;s a partnership in building.
                   You&apos;ll learn more in weeks than most do in semesters.
@@ -296,23 +295,40 @@ export default function CareersPage() {
               </p>
             </div>
             <div>
-              <h5 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-4">Navigation</h5>
+              <h5 className="text-sm font-semibold uppercase tracking-widest text-primary mb-4">Navigation</h5>
               <div className="flex flex-col gap-3 text-sm">
-                <a href="#about" className="text-foreground/70 hover:text-foreground transition-colors">About</a>
+                <Link href="/about" className="text-foreground/70 hover:text-foreground transition-colors">About</Link>
                 <a href="#roles" className="text-foreground/70 hover:text-foreground transition-colors">Open Roles</a>
               </div>
             </div>
             <div>
-              <h5 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-4">Connect</h5>
+              <h5 className="text-sm font-semibold uppercase tracking-widest text-primary mb-4">Connect</h5>
               <div className="flex flex-col gap-3 text-sm">
-                <a href="#" className="text-foreground/70 hover:text-foreground transition-colors">Twitter</a>
-                <a href="#" className="text-foreground/70 hover:text-foreground transition-colors">LinkedIn</a>
-                <a href="#" className="text-foreground/70 hover:text-foreground transition-colors">Instagram</a>
+                <a
+                  href="https://www.linkedin.com/company/letsrestart"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground/70 hover:text-foreground transition-colors"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href="https://www.instagram.com/lets.re.start/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground/70 hover:text-foreground transition-colors"
+                >
+                  Instagram
+                </a>
               </div>
             </div>
           </div>
-          <div className="pt-8 border-t border-border/50 text-xs text-muted-foreground/60">
-            © {new Date().getFullYear()} REstart. All rights reserved.
+          <div className="pt-8 border-t border-border/50 text-xs text-muted-foreground/60 flex flex-col md:flex-row justify-between items-center gap-4">
+            <span>© {new Date().getFullYear()} REstart. All rights reserved.</span>
+            <div className="flex gap-6">
+              <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-foreground transition-colors">Terms & Conditions</Link>
+            </div>
           </div>
         </div>
       </footer>
