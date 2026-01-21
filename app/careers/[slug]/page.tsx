@@ -67,21 +67,21 @@ export default async function JobDetailPage({ params }: PageProps) {
     <div className="min-h-screen bg-background text-foreground animate-in fade-in duration-700 font-sans selection:bg-black selection:text-white">
       {/* Nav */}
       <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-sm border-b border-border/50">
-        <div className="max-w-[1000px] mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/careers" className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2">
+        <div className="max-w-[1000px] mx-auto px-6 h-20 flex items-center justify-between">
+          <Link href="/careers" className="text-base text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2">
             <ArrowLeft className="w-4 h-4" /> All Roles
           </Link>
           <span className="font-semibold tracking-tight">
             <Image
               src="/REstart_logo.svg"
               alt="REstart"
-              width={100}
-              height={28}
+              width={130}
+              height={36}
               priority
             />
           </span>
           <Link href={`/careers/${job.slug}/apply`}>
-            <Button size="sm" className="rounded-full px-6">Apply</Button>
+            <Button className="rounded-full px-6">Apply</Button>
           </Link>
         </div>
       </nav>

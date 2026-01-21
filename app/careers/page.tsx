@@ -67,24 +67,25 @@ export default function CareersPage() {
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-foreground selection:text-background">
 
       {/* Fixed Header */}
+      {/* Fixed Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 h-16 flex items-center justify-between">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
           <Link href="/careers" className="font-semibold text-lg tracking-tight">
             <Image
               src="/REstart_logo.svg"
               alt="REstart"
-              width={100}
-              height={28}
+              width={130}
+              height={36}
               priority
             />
           </Link>
-          <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
+          <nav className="hidden md:flex items-center gap-8 text-base text-muted-foreground">
             <a href="#about" className="hover:text-foreground transition-colors">About</a>
             <a href="#roles" className="hover:text-foreground transition-colors">Roles</a>
           </nav>
           <button
             onClick={() => document.getElementById('roles')?.scrollIntoView({ behavior: 'smooth' })}
-            className="text-sm font-medium bg-primary text-primary-foreground px-4 py-2 rounded-full hover:opacity-90 transition-opacity"
+            className="text-base font-medium bg-primary text-primary-foreground px-6 py-2.5 rounded-full hover:opacity-90 transition-opacity"
           >
             Join Us
           </button>
