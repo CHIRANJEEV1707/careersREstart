@@ -275,19 +275,19 @@ export default function ApplyPage() {
             <div className="grid md:grid-cols-2 gap-6 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-700" htmlFor="name">Full Name *</label>
-                <Input id="name" name="name" value={formData.name} onChange={handleChange} placeholder="e.g. Jane Doe" className={`bg-slate-50/50 border-slate-200 focus:bg-white transition-all h-11 ${errors.name ? "border-red-500 focus:ring-red-200" : ""}`} />
-                {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
+                <Input id="name" name="name" value={formData.name} onChange={handleChange} placeholder="e.g. Jane Doe" className={`bg-slate-50/50 border-slate-200 focus:bg-white transition-all h-11 ${errors.name ? "border-red-500 focus:ring-red-200 bg-red-50/30" : ""}`} />
+                {errors.name && <p className="text-xs text-red-500 font-medium">{errors.name}</p>}
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-700" htmlFor="email">Email Address *</label>
-                <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="e.g. jane@work.com" className={`bg-slate-50/50 border-slate-200 focus:bg-white transition-all h-11 ${errors.email ? "border-red-500 focus:ring-red-200" : ""}`} />
-                {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
+                <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="e.g. jane@work.com" className={`bg-slate-50/50 border-slate-200 focus:bg-white transition-all h-11 ${errors.email ? "border-red-500 focus:ring-red-200 bg-red-50/30" : ""}`} />
+                {errors.email && <p className="text-xs text-red-500 font-medium">{errors.email}</p>}
               </div>
 
               <div className="space-y-2 md:col-span-2">
                 <label className="text-sm font-medium text-slate-700" htmlFor="phone">Phone Number *</label>
-                <div className={`flex items-center border rounded-lg overflow-hidden bg-slate-50/50 transition-all focus-within:bg-white focus-within:ring-2 focus-within:ring-slate-900/10 focus-within:border-slate-400 ${errors.phone ? "border-red-500 ring-red-200" : "border-slate-200"}`}>
+                <div className={`flex items-center border rounded-lg overflow-hidden bg-slate-50/50 transition-all focus-within:bg-white focus-within:ring-2 focus-within:ring-slate-900/10 focus-within:border-slate-400 ${errors.phone ? "border-red-500 ring-red-200 bg-red-50/30" : "border-slate-200"}`}>
                   <div className="relative">
                     <select
                       value={countryCode}
@@ -310,19 +310,19 @@ export default function ApplyPage() {
                     className="flex-1 bg-transparent px-4 py-3 text-sm outline-none placeholder:text-slate-400 text-slate-900 font-medium"
                   />
                 </div>
-                {errors.phone && <p className="text-xs text-red-500 mt-1.5">{errors.phone}</p>}
+                {errors.phone && <p className="text-xs text-red-500 mt-1.5 font-medium">{errors.phone}</p>}
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-700" htmlFor="college">Current Org / College *</label>
-                <Input id="college" name="college" value={formData.college} onChange={handleChange} placeholder="e.g. Google / IIT Bombay" className={`bg-slate-50/50 border-slate-200 focus:bg-white transition-all h-11 ${errors.college ? "border-red-500 focus:ring-red-200" : ""}`} />
-                {errors.college && <p className="text-xs text-red-500">{errors.college}</p>}
+                <Input id="college" name="college" value={formData.college} onChange={handleChange} placeholder="e.g. Google / IIT Bombay" className={`bg-slate-50/50 border-slate-200 focus:bg-white transition-all h-11 ${errors.college ? "border-red-500 focus:ring-red-200 bg-red-50/30" : ""}`} />
+                {errors.college && <p className="text-xs text-red-500 font-medium">{errors.college}</p>}
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-700" htmlFor="year">Year / Role *</label>
                 <div className="relative">
-                  <select id="year" name="year" value={formData.year} onChange={handleChange} className={`appearance-none flex h-11 w-full rounded-md border bg-slate-50/50 px-3 py-2 text-sm text-slate-700 transition-all focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 cursor-pointer hover:bg-slate-100/50 ${errors.year ? "border-red-500" : "border-slate-200"}`}>
+                  <select id="year" name="year" value={formData.year} onChange={handleChange} className={`appearance-none flex h-11 w-full rounded-md border bg-slate-50/50 px-3 py-2 text-sm text-slate-700 transition-all focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 cursor-pointer hover:bg-slate-100/50 ${errors.year ? "border-red-500 focus:ring-red-200 bg-red-50/30" : "border-slate-200"}`}>
                     <option value="">Select...</option>
                     <option value="1st Year">1st Year Student</option>
                     <option value="2nd Year">2nd Year Student</option>
@@ -333,13 +333,13 @@ export default function ApplyPage() {
                   </select>
                   <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
-                {errors.year && <p className="text-xs text-red-500">{errors.year}</p>}
+                {errors.year && <p className="text-xs text-red-500 font-medium">{errors.year}</p>}
               </div>
 
               <div className="space-y-2 md:col-span-2">
                 <label className="text-sm font-medium text-slate-700" htmlFor="location">Current Location *</label>
-                <Input id="location" name="location" value={formData.location} onChange={handleChange} placeholder="e.g. Bengaluru, India" className={`bg-slate-50/50 border-slate-200 focus:bg-white transition-all h-11 ${errors.location ? "border-red-500 focus:ring-red-200" : ""}`} />
-                {errors.location && <p className="text-xs text-red-500">{errors.location}</p>}
+                <Input id="location" name="location" value={formData.location} onChange={handleChange} placeholder="e.g. Bengaluru, India" className={`bg-slate-50/50 border-slate-200 focus:bg-white transition-all h-11 ${errors.location ? "border-red-500 focus:ring-red-200 bg-red-50/30" : ""}`} />
+                {errors.location && <p className="text-xs text-red-500 font-medium">{errors.location}</p>}
               </div>
             </div>
           </section>
@@ -355,7 +355,7 @@ export default function ApplyPage() {
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-700" htmlFor="availability">Weekly Availability *</label>
                 <div className="relative">
-                  <select id="availability" name="availability" value={formData.availability} onChange={handleChange} className={`appearance-none flex h-11 w-full rounded-md border bg-slate-50/50 px-3 py-2 text-sm text-slate-700 transition-all focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 cursor-pointer hover:bg-slate-100/50 ${errors.availability ? "border-red-500" : "border-slate-200"}`}>
+                  <select id="availability" name="availability" value={formData.availability} onChange={handleChange} className={`appearance-none flex h-11 w-full rounded-md border bg-slate-50/50 px-3 py-2 text-sm text-slate-700 transition-all focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 cursor-pointer hover:bg-slate-100/50 ${errors.availability ? "border-red-500 focus:ring-red-200 bg-red-50/30" : "border-slate-200"}`}>
                     <option value="">Select...</option>
                     <option value="<5 hours">Less than 5 hours</option>
                     <option value="5-10 hours">5-10 hours</option>
@@ -365,13 +365,13 @@ export default function ApplyPage() {
                   </select>
                   <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
-                {errors.availability && <p className="text-xs text-red-500">{errors.availability}</p>}
+                {errors.availability && <p className="text-xs text-red-500 font-medium">{errors.availability}</p>}
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-700" htmlFor="startTimeline">Start Timeline *</label>
                 <div className="relative">
-                  <select id="startTimeline" name="startTimeline" value={formData.startTimeline} onChange={handleChange} className={`appearance-none flex h-11 w-full rounded-md border bg-slate-50/50 px-3 py-2 text-sm text-slate-700 transition-all focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 cursor-pointer hover:bg-slate-100/50 ${errors.startTimeline ? "border-red-500" : "border-slate-200"}`}>
+                  <select id="startTimeline" name="startTimeline" value={formData.startTimeline} onChange={handleChange} className={`appearance-none flex h-11 w-full rounded-md border bg-slate-50/50 px-3 py-2 text-sm text-slate-700 transition-all focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 cursor-pointer hover:bg-slate-100/50 ${errors.startTimeline ? "border-red-500 focus:ring-red-200 bg-red-50/30" : "border-slate-200"}`}>
                     <option value="">Select...</option>
                     <option value="Immediately">Immediately</option>
                     <option value="Within 1 month">Within 1 month</option>
@@ -379,7 +379,7 @@ export default function ApplyPage() {
                   </select>
                   <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
-                {errors.startTimeline && <p className="text-xs text-red-500">{errors.startTimeline}</p>}
+                {errors.startTimeline && <p className="text-xs text-red-500 font-medium">{errors.startTimeline}</p>}
               </div>
             </div>
           </section>
@@ -394,14 +394,14 @@ export default function ApplyPage() {
             <div className="space-y-6 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-700" htmlFor="portfolioLink">Portfolio / GitHub / Drive Link *</label>
-                <Input id="portfolioLink" name="portfolioLink" value={formData.portfolioLink} onChange={handleChange} placeholder="https://..." className={`bg-slate-50/50 border-slate-200 focus:bg-white transition-all h-11 ${errors.portfolioLink ? "border-red-500 focus:ring-red-200" : ""}`} />
-                {errors.portfolioLink && <p className="text-xs text-red-500">{errors.portfolioLink}</p>}
+                <Input id="portfolioLink" name="portfolioLink" value={formData.portfolioLink} onChange={handleChange} placeholder="https://..." className={`bg-slate-50/50 border-slate-200 focus:bg-white transition-all h-11 ${errors.portfolioLink ? "border-red-500 focus:ring-red-200 bg-red-50/30" : ""}`} />
+                {errors.portfolioLink && <p className="text-xs text-red-500 font-medium">{errors.portfolioLink}</p>}
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-700" htmlFor="resumeUrl">Resume Link *</label>
-                <Input id="resumeUrl" name="resumeUrl" value={formData.resumeUrl} onChange={handleChange} placeholder="https://..." className={`bg-slate-50/50 border-slate-200 focus:bg-white transition-all h-11 ${errors.resumeUrl ? "border-red-500 focus:ring-red-200" : ""}`} />
-                {errors.resumeUrl && <p className="text-xs text-red-500">{errors.resumeUrl}</p>}
+                <Input id="resumeUrl" name="resumeUrl" value={formData.resumeUrl} onChange={handleChange} placeholder="https://..." className={`bg-slate-50/50 border-slate-200 focus:bg-white transition-all h-11 ${errors.resumeUrl ? "border-red-500 focus:ring-red-200 bg-red-50/30" : ""}`} />
+                {errors.resumeUrl && <p className="text-xs text-red-500 font-medium">{errors.resumeUrl}</p>}
               </div>
 
               <div className="space-y-2 pt-2">
@@ -415,9 +415,9 @@ export default function ApplyPage() {
                   value={formData.experienceSummary}
                   onChange={handleChange}
                   placeholder="Tell us about the most relevant project you've built. Be specific about your contribution."
-                  className={`flex min-h-[140px] w-full rounded-xl border bg-slate-50/50 px-4 py-3 text-sm placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all ${errors.experienceSummary ? "border-red-500 ring-red-200 focus:ring-red-200" : "border-slate-200"}`}
+                  className={`flex min-h-[140px] w-full rounded-xl border bg-slate-50/50 px-4 py-3 text-sm placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all ${errors.experienceSummary ? "border-red-500 ring-red-200 focus:ring-red-200 bg-red-50/30" : "border-slate-200"}`}
                 />
-                {errors.experienceSummary && <p className="text-xs text-red-500">{errors.experienceSummary}</p>}
+                {errors.experienceSummary && <p className="text-xs text-red-500 font-medium">{errors.experienceSummary}</p>}
               </div>
             </div>
           </section>
@@ -441,9 +441,9 @@ export default function ApplyPage() {
                   value={formData.motivation}
                   onChange={handleChange}
                   placeholder="What drives you? Why REstart?"
-                  className={`flex min-h-[120px] w-full rounded-xl border bg-slate-50/50 px-4 py-3 text-sm placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all ${errors.motivation ? "border-red-500 ring-red-200" : "border-slate-200"}`}
+                  className={`flex min-h-[120px] w-full rounded-xl border bg-slate-50/50 px-4 py-3 text-sm placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all ${errors.motivation ? "border-red-500 ring-red-200 bg-red-50/30" : "border-slate-200"}`}
                 />
-                {errors.motivation && <p className="text-xs text-red-500">{errors.motivation}</p>}
+                {errors.motivation && <p className="text-xs text-red-500 font-medium">{errors.motivation}</p>}
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between items-end">
@@ -456,9 +456,9 @@ export default function ApplyPage() {
                   value={formData.problemInterest}
                   onChange={handleChange}
                   placeholder="Give us an example of a hard problem you cracked."
-                  className={`flex min-h-[120px] w-full rounded-xl border bg-slate-50/50 px-4 py-3 text-sm placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all ${errors.problemInterest ? "border-red-500 ring-red-200" : "border-slate-200"}`}
+                  className={`flex min-h-[120px] w-full rounded-xl border bg-slate-50/50 px-4 py-3 text-sm placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all ${errors.problemInterest ? "border-red-500 ring-red-200 bg-red-50/30" : "border-slate-200"}`}
                 />
-                {errors.problemInterest && <p className="text-xs text-red-500">{errors.problemInterest}</p>}
+                {errors.problemInterest && <p className="text-xs text-red-500 font-medium">{errors.problemInterest}</p>}
               </div>
             </div>
           </section>
@@ -473,11 +473,11 @@ export default function ApplyPage() {
             <div className="grid md:grid-cols-1 gap-6 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-700" htmlFor="examBackground">Exams Cleared / Ranks <span className="text-slate-400 font-normal">(For Mentors)</span></label>
-                <Input id="examBackground" name="examBackground" value={formData.examBackground} onChange={handleChange} placeholder="e.g. JEE Adv Rank 1234" className="bg-slate-50/50 border-slate-200 focus:bg-white transition-all h-11" />
+                <Input id="examBackground" name="examBackground" value={formData.examBackground} onChange={handleChange} placeholder="e.g. JEE Adv Rank 1234, BITSAT 350" className={`bg-slate-50/50 border-slate-200 focus:bg-white transition-all h-11`} />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-700" htmlFor="teachingExperience">Prior Teaching Experience?</label>
-                <Input id="teachingExperience" name="teachingExperience" value={formData.teachingExperience} onChange={handleChange} placeholder="e.g. Taught physics to juniors" className="bg-slate-50/50 border-slate-200 focus:bg-white transition-all h-11" />
+                <Input id="teachingExperience" name="teachingExperience" value={formData.teachingExperience} onChange={handleChange} placeholder="e.g. Taught physics to juniors" className={`bg-slate-50/50 border-slate-200 focus:bg-white transition-all h-11`} />
               </div>
             </div>
           </section>
