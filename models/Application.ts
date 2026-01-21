@@ -12,7 +12,7 @@ export interface IApplication extends Document {
   availability: string;
   startTimeline: string;
   portfolioLink: string;
-  resumeUrl?: string;
+  resumeUrl: string;
   experienceSummary: string;
   motivation: string;
   problemInterest: string;
@@ -88,6 +88,7 @@ const ApplicationSchema = new Schema<IApplication>(
     },
     resumeUrl: {
       type: String,
+      required: [true, 'Resume link is required'],
       trim: true,
     },
     experienceSummary: {

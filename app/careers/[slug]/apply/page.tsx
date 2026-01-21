@@ -150,6 +150,8 @@ export default function ApplyPage() {
 
     // 3. Proof of Work
     if (!formData.portfolioLink.trim()) newErrors.portfolioLink = "Portfolio/GitHub link is required";
+    if (!formData.resumeUrl.trim()) newErrors.resumeUrl = "Resume link is required";
+
     if (!formData.experienceSummary.trim()) newErrors.experienceSummary = "Summary is required";
     else if (formData.experienceSummary.length < 50) newErrors.experienceSummary = "Please write at least 50 characters";
 
@@ -356,8 +358,9 @@ export default function ApplyPage() {
                 {errors.portfolioLink && <p className="text-xs text-destructive">{errors.portfolioLink}</p>}
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium" htmlFor="resumeUrl">Resume Link (Optional)</label>
-                <Input id="resumeUrl" name="resumeUrl" value={formData.resumeUrl} onChange={handleChange} placeholder="https://..." />
+                <label className="text-sm font-medium" htmlFor="resumeUrl">Resume Link *</label>
+                <Input id="resumeUrl" name="resumeUrl" value={formData.resumeUrl} onChange={handleChange} placeholder="https://..." className={errors.resumeUrl ? "border-destructive" : ""} />
+                {errors.resumeUrl && <p className="text-xs text-destructive">{errors.resumeUrl}</p>}
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between">

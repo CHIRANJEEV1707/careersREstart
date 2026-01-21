@@ -18,7 +18,7 @@ interface ApplicationBody {
   availability: string;
   startTimeline: string;
   portfolioLink: string;
-  resumeUrl?: string;
+  resumeUrl: string;
   experienceSummary: string;
   motivation: string;
   problemInterest: string;
@@ -60,6 +60,8 @@ export async function POST(request: Request) {
 
     // 3. Proof of Work
     if (!body.portfolioLink || body.portfolioLink.trim().length === 0) errors.portfolioLink = 'Portfolio link is required';
+    if (!body.resumeUrl || body.resumeUrl.trim().length === 0) errors.resumeUrl = 'Resume link is required';
+
     if (!body.experienceSummary || body.experienceSummary.trim().length === 0) {
       errors.experienceSummary = 'Experience summary is required';
     } else if (body.experienceSummary.trim().length < 50) {
