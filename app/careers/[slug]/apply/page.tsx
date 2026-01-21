@@ -27,6 +27,7 @@ interface FormData {
 interface FormErrors {
   name?: string;
   email?: string;
+  phone?: string;
   portfolioLink?: string;
   coverNote?: string;
   weeklyAvailability?: string;
@@ -53,6 +54,21 @@ export default function ApplyPage() {
     coverNote: "",
     weeklyAvailability: "",
   });
+
+  const [countryCode, setCountryCode] = useState("+91");
+  const [localPhone, setLocalPhone] = useState("");
+
+  const countryCodes = [
+    { code: "+91", country: "IN" },
+    { code: "+1", country: "US/CA" },
+    { code: "+44", country: "UK" },
+    { code: "+61", country: "AU" },
+    { code: "+49", country: "DE" },
+    { code: "+33", country: "FR" },
+    { code: "+81", country: "JP" },
+    { code: "+86", country: "CN" },
+    { code: "+971", country: "AE" },
+  ];
 
   // Fetch job data
   useEffect(() => {
@@ -81,6 +97,17 @@ export default function ApplyPage() {
     }
   };
 
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLocalPhone(e.target.value);
+    if (errors.phone) {
+      setErrors(prev => ({ ...prev, phone: undefined }));
+    }
+  };
+
+  const handleCodeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCountryCode(e.target.value);
+  };
+
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
 
@@ -88,10 +115,16 @@ export default function ApplyPage() {
       newErrors.name = "Name is required";
     }
 
-    if (!formData.email.trim()) {
+    if (formData.email.trim()) {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+        newErrors.email = "Please enter a valid email address";
+      }
+    } else {
       newErrors.email = "Email is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address";
+    }
+
+    if (!localPhone.trim()) {
+      newErrors.phone = "Phone number is required";
     }
 
     if (!formData.portfolioLink.trim()) {
@@ -119,11 +152,13 @@ export default function ApplyPage() {
     setErrors({});
 
     try {
+      const fullPhone = `${countryCode} ${localPhone}`;
       const res = await fetch("/api/apply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
+          phone: fullPhone,
           jobSlug: slug,
         }),
       });
@@ -233,16 +268,30 @@ export default function ApplyPage() {
               </div>
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-medium" htmlFor="phone">Phone (Optional)</label>
-              <Input
-                id="phone"
-                name="phone"
-                type="tel"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="+1 (555) 000-0000"
-                className="bg-transparent border-t-0 border-x-0 border-b border-border rounded-none px-0 focus-visible:ring-0 focus-visible:border-foreground transition-colors"
-              />
+              <label className="text-sm font-medium" htmlFor="phone">Phone *</label>
+              <div className="flex border-b border-border">
+                <select
+                  value={countryCode}
+                  onChange={handleCodeChange}
+                  className="bg-transparent text-sm border-r border-border px-3 py-2 outline-none cursor-pointer hover:bg-muted/50 transition-colors w-[80px]"
+                >
+                  {countryCodes.map((c) => (
+                    <option key={c.code} value={c.code} className="bg-background text-foreground">
+                      {c.code}
+                    </option>
+                  ))}
+                </select>
+                <Input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  value={localPhone}
+                  onChange={handlePhoneChange}
+                  placeholder="9876543210"
+                  className={`bg-transparent border-none rounded-none px-4 focus-visible:ring-0 shadow-none ${errors.phone ? 'text-destructive placeholder:text-destructive/60' : ''}`}
+                />
+              </div>
+              {errors.phone && <p className="text-xs text-destructive">{errors.phone}</p>}
             </div>
           </section>
 
