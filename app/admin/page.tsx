@@ -13,9 +13,9 @@ interface Application {
   _id: string;
   name: string;
   email: string;
-  phone?: string;
+  phone: string;
   portfolioLink: string;
-  coverNote: string;
+  resumeUrl: string;
   weeklyAvailability: string;
   status: string;
   createdAt: string;
@@ -342,7 +342,7 @@ export default function AdminDashboard() {
                           <div className="font-medium text-slate-900">
                             {app.name}
                           </div>
-                          {app.portfolioLink && (
+                          <div className="flex gap-2 mt-1">
                             <a
                               href={app.portfolioLink}
                               target="_blank"
@@ -351,7 +351,16 @@ export default function AdminDashboard() {
                             >
                               Portfolio
                             </a>
-                          )}
+                            <span className="text-slate-300">|</span>
+                            <a
+                              href={app.resumeUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-xs text-blue-600 hover:underline"
+                            >
+                              Resume
+                            </a>
+                          </div>
                         </td>
                         <td className="px-4 py-4 text-sm text-slate-600">
                           {app.email}
