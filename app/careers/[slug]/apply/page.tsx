@@ -7,6 +7,7 @@ import { useRouter, useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowLeft, Loader2, Check, AlertCircle } from "lucide-react";
+import { isValidPhoneNumber } from "libphonenumber-js";
 
 interface Job {
   _id: string;
@@ -137,8 +138,14 @@ export default function ApplyPage() {
     if (!formData.email.trim()) newErrors.email = "Email is required";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "Invalid email format";
 
-    if (!localPhone.trim()) newErrors.phone = "Phone number is required";
-    else if (localPhone.length < 5) newErrors.phone = "Phone number seems too short";
+    if (!localPhone.trim()) {
+      newErrors.phone = "Phone number is required";
+    } else {
+      const fullPhone = `${countryCode}${localPhone}`;
+      if (!isValidPhoneNumber(fullPhone)) {
+        newErrors.phone = "Invalid phone number for selected country";
+      }
+    }
 
     if (!formData.college.trim()) newErrors.college = "College/Org is required";
     if (!formData.year.trim()) newErrors.year = "Year is required";

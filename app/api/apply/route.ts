@@ -4,6 +4,7 @@ import Application from '@/models/Application';
 import Job from '@/models/Job';
 import mongoose from 'mongoose';
 import { sendEmail, generateConfirmationEmail } from '@/lib/email';
+import { isValidPhoneNumber } from 'libphonenumber-js';
 
 // Email validation regex
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -47,7 +48,11 @@ export async function POST(request: Request) {
       errors.email = 'Please enter a valid email address';
     }
 
-    if (!body.phone || body.phone.trim().length === 0) errors.phone = 'Phone number is required';
+    if (!body.phone || body.phone.trim().length === 0) {
+      errors.phone = 'Phone number is required';
+    } else if (!isValidPhoneNumber(body.phone)) {
+      errors.phone = 'Invalid international phone number format';
+    }
     if (!body.college || body.college.trim().length === 0) errors.college = 'College/Organization is required';
     if (!body.year || body.year.trim().length === 0) errors.year = 'Year is required';
     if (!body.location || body.location.trim().length === 0) errors.location = 'Location is required';
