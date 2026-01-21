@@ -61,6 +61,8 @@ export default function RotatingEarth({ width = 800, height = 600, className = "
     const pointInFeature = (point: [number, number], feature: d3.GeoPermissibleObjects): boolean => {
       const geometry = (feature as d3.ExtendedFeature).geometry
 
+      if (!geometry) return false
+
       if (geometry.type === "Polygon") {
         const coordinates = geometry.coordinates as number[][][]
         // Check if point is in outer ring
