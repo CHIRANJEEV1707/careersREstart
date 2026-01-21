@@ -73,10 +73,10 @@ export default async function JobDetailPage({ params }: PageProps) {
           </Link>
           <span className="font-semibold tracking-tight">
             <Image
-              src="/REstart_logo.svg"
+              src="/REstart_logo.png"
               alt="REstart"
-              width={60}
-              height={60}
+              width={140}
+              height={40}
               priority
             />
           </span>

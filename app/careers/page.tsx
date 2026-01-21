@@ -72,10 +72,10 @@ export default function CareersPage() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
           <Link href="/careers" className="font-semibold text-lg tracking-tight">
             <Image
-              src="/REstart_logo.svg"
+              src="/REstart_logo.png"
               alt="REstart"
-              width={60}
-              height={60}
+              width={140}
+              height={40}
               priority
             />
           </Link>
