@@ -272,7 +272,7 @@ export default function ApplyPage() {
               <h3 className="text-lg font-medium text-slate-900">The Basics</h3>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm">
+            <div className="grid md:grid-cols-2 gap-6 p-4 md:p-6 bg-white rounded-2xl border border-slate-100 shadow-sm">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-700" htmlFor="name">Full Name *</label>
                 <Input id="name" name="name" value={formData.name} onChange={handleChange} placeholder="e.g. Jane Doe" className={`bg-slate-50/50 border-slate-200 focus:bg-white transition-all h-11 ${errors.name ? "border-red-500 focus:ring-red-200 bg-red-50/30" : ""}`} />
@@ -287,7 +287,7 @@ export default function ApplyPage() {
 
               <div className="space-y-2 md:col-span-2">
                 <label className="text-sm font-medium text-slate-700" htmlFor="phone">Phone Number *</label>
-                <div className={`flex items-center border rounded-lg overflow-hidden bg-slate-50/50 transition-all focus-within:bg-white focus-within:ring-2 focus-within:ring-slate-900/10 focus-within:border-slate-400 ${errors.phone ? "border-red-500 ring-red-200 bg-red-50/30" : "border-slate-200"}`}>
+                <div className={`flex items-center border rounded-lg overflow-hidden bg-slate-50/50 transition-all focus-within:bg-white focus-within:ring-2 focus-within:ring-slate-900/10 focus-within:border-slate-400 w-full ${errors.phone ? "border-red-500 ring-red-200 bg-red-50/30" : "border-slate-200"}`}>
                   <div className="relative">
                     <select
                       value={countryCode}
@@ -307,7 +307,7 @@ export default function ApplyPage() {
                     value={localPhone}
                     onChange={handlePhoneChange}
                     placeholder={activePlaceholder}
-                    className="flex-1 bg-transparent px-4 py-3 text-sm outline-none placeholder:text-slate-400 text-slate-900 font-medium"
+                    className="flex-1 bg-transparent px-4 py-3 text-sm outline-none placeholder:text-slate-400 text-slate-900 font-medium min-w-0"
                   />
                 </div>
                 {errors.phone && <p className="text-xs text-red-500 mt-1.5 font-medium">{errors.phone}</p>}
@@ -351,7 +351,7 @@ export default function ApplyPage() {
               <h3 className="text-lg font-medium text-slate-900">Logistics</h3>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm">
+            <div className="grid md:grid-cols-2 gap-6 p-4 md:p-6 bg-white rounded-2xl border border-slate-100 shadow-sm">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-700" htmlFor="availability">Weekly Availability *</label>
                 <div className="relative">
@@ -391,7 +391,7 @@ export default function ApplyPage() {
               <h3 className="text-lg font-medium text-slate-900">Proof of Work</h3>
             </div>
 
-            <div className="space-y-6 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm">
+            <div className="space-y-6 p-4 md:p-6 bg-white rounded-2xl border border-slate-100 shadow-sm">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-700" htmlFor="portfolioLink">Portfolio / GitHub / Drive Link *</label>
                 <Input id="portfolioLink" name="portfolioLink" value={formData.portfolioLink} onChange={handleChange} placeholder="https://..." className={`bg-slate-50/50 border-slate-200 focus:bg-white transition-all h-11 ${errors.portfolioLink ? "border-red-500 focus:ring-red-200 bg-red-50/30" : ""}`} />
@@ -430,7 +430,7 @@ export default function ApplyPage() {
               <h3 className="text-lg font-medium text-slate-900">Motivation</h3>
             </div>
 
-            <div className="space-y-6 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm">
+            <div className="space-y-6 p-4 md:p-6 bg-white rounded-2xl border border-slate-100 shadow-sm">
               <div className="space-y-2">
                 <div className="flex justify-between items-end">
                   <label className="text-sm font-medium text-slate-700" htmlFor="motivation">Why are you interested in this role? *</label>
@@ -473,7 +473,7 @@ export default function ApplyPage() {
               <h3 className="text-lg font-medium text-slate-900">Optional</h3>
             </div>
 
-            <div className="grid md:grid-cols-1 gap-6 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm">
+            <div className="grid md:grid-cols-1 gap-6 p-4 md:p-6 bg-white rounded-2xl border border-slate-100 shadow-sm">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-slate-700" htmlFor="examBackground">Exams Cleared / Ranks <span className="text-slate-400 font-normal">(For Mentors)</span></label>
                 <Input id="examBackground" name="examBackground" value={formData.examBackground} onChange={handleChange} placeholder="e.g. JEE Adv Rank 1234, BITSAT 350" className={`bg-slate-50/50 border-slate-200 focus:bg-white transition-all h-11`} />
@@ -487,7 +487,7 @@ export default function ApplyPage() {
 
           {/* Section 6: Consent */}
           <section className="space-y-8 pt-8">
-            <div className="p-6 bg-slate-50/50 rounded-2xl border border-slate-100 space-y-6">
+            <div className="p-4 md:p-6 bg-slate-50/50 rounded-2xl border border-slate-100 space-y-6">
               <div className="flex items-start gap-4">
                 <input
                   type="checkbox"
